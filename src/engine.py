@@ -10,9 +10,11 @@ from collision import *
 from character import *
 from baddies import *
 
-sys.path.append('./constants')
+# sys.path.append('./constants')
 
-from DIRECTIONS import *
+from constants import *
+
+## !! ----- Constants ----- !! ##
 
 import loadMap
 from loadMap import *
