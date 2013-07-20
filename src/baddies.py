@@ -19,8 +19,8 @@ def generateBaddies(char, map):
 		b = Sprite('../resources/baddie.png')
 		b.set_position(posx, posy)
 		b.group = 0
-		#if pygame.sprite.spritecollideany(b, noBaddies) == None:
-		baddies.add(b)
-	#	i += 1
+		if pygame.sprite.spritecollideany(b, noBaddies) == None:
+			baddies.add(b)
+			i += 1
 
 	return baddies
