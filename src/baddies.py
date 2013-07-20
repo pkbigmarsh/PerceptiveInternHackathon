@@ -26,7 +26,7 @@ class Baddies(pygame.sprite.Group):
 			posx, posy = randint(0,800-b.rect.width), randint(0,600-b.rect.height)
 			b.set_position(posx, posy)
 			b.group = 0
-			if pygame.sprite.spritecollideany(b, noBaddies) == None:
+			if pygame.sprite.spritecollideany(b, noBaddies) == None and pygame.sprite.spritecollideany(b, self) == None:
 				self.add(b)
 				i += 1
 
