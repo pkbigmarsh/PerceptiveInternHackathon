@@ -5,11 +5,12 @@
 
 import pygame, sys
 from pygame.locals import *
-
+from sprite import Sprite
 from constants import *
 
 tileData = []
 tileImages = dict()
+impass = pygame.sprite.Group()
 
 def loadMap(filename):
 	file = open(filename)
@@ -35,6 +36,9 @@ def loadMap(filename):
 				'type': "rock"
 				}
 				tileData.append(newTile)
+				b = Sprite('../resources/bush.png')
+				b.set_position(x, y)
+				impass.add(b)
 			x += TILE_SIZE
 		y += TILE_SIZE
 
@@ -48,3 +52,6 @@ def initTiles():
 	tileImages['G'] = pygame.image.load('../resources/grass.png')
 	tileImages['R'] = pygame.image.load('../resources/rock.png')
 	tileImages['B'] = pygame.image.load('../resources/bush.png')
+
+def impassables():
+	return impass
