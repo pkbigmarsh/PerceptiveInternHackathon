@@ -10,6 +10,7 @@ from sprite import *
 ## !! ----- Constants ----- !! ##
 FRAME_RATE = 30
 SCREEN_SIZE = WIDTH, HEIGHT = 800, 400
+TILE_SIZE = 20
 
 ## !! ----- Game Logic ----- !! ##
 pygame.init()
@@ -34,9 +35,8 @@ while True:
 			pygame.quit()
 			sys.exit()
 		elif event.type == KEYDOWN:
-			print 'nothing here yet'
-			#if event.key in (K_LEFT, K_RIGHT, K_UP, K_DOWN):
-				# TODO: move sprite
+			if event.key in (K_LEFT, K_RIGHT, K_UP, K_DOWN):
+				char.rect.x = char.rect.x + TILE_SIZE
 
 	pygame.display.update()
 	fpsClock.tick(30)
