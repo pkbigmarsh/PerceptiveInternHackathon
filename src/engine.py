@@ -7,7 +7,7 @@ import pygame, sys
 from pygame.locals import *
 from sprite import *
 from collision import *
-from character import *
+from Character import *
 from Baddies import *
 from AnimatedSprite import *
 
@@ -29,8 +29,8 @@ fpsClock = pygame.time.Clock()
 windowSurfaceObj = pygame.display.set_mode(SCREEN_SIZE)
 pygame.display.set_caption('Hackathon')
 
-char = Character()
-
+char = Character('../resources/char.png',10,10)
+char.set_position(100,100)
 sprite = AnimatedSprite('../resources/spriteSheet1.png', 5, 1)
 sprite.play_row(0)
 
@@ -39,16 +39,15 @@ loadMap('../resources/map1.csv')
 
 whiteColor = pygame.Color(255,255,255)
 baddy = Baddies()
-print char
-print impassables()
-baddy.generateBaddies(char,impassables())
+impass = impassables()
+baddy.generateBaddies(char,impass)
 
 while True:
 	windowSurfaceObj.fill(whiteColor)
 	
 	drawTiles(windowSurfaceObj)
 
-	char.draw(windowSurfaceObj)
+	char.update(windowSurfaceObj)
 	
 	baddy.update(windowSurfaceObj)
 
@@ -89,16 +88,16 @@ while True:
 			if event.key == K_RIGHT:
 				moveRight = False
 	if moveUp:
-		char.move(NORTH)
+		char.move(NORTH, impass, baddy)
 		# sprite.stop()
 	if moveDown:
-		char.move(SOUTH)
+		char.move(SOUTH, impass, baddy)
 		# sprite.stop()
 	if moveLeft:
-		char.move(WEST)
+		char.move(WEST, impass, baddy)
 		# sprite.stop()
 	if moveRight:
-		char.move(EAST)
+		char.move(EAST, impass, baddy)
 		# sprite.stop()
 	sprite.draw(windowSurfaceObj)
 	pygame.display.update()

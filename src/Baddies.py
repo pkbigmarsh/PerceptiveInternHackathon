@@ -12,7 +12,7 @@ class Baddies(pygame.sprite.Group):
 		noBaddies = map.copy()
 		playerSprite = pygame.sprite.Sprite()
 
-		x, y = char.sprite.get_position()
+		x, y = char.get_position()
 		no_zone = pygame.rect.Rect((x,y),(100,100))
 		playerSprite.rect = no_zone
 		noBaddies.add(playerSprite)
