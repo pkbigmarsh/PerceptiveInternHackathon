@@ -8,6 +8,7 @@ from pygame.locals import *
 from sprite import *
 from collision import *
 from character import *
+from baddies import *
 
 sys.path.append('./constants')
 
@@ -41,6 +42,8 @@ while True:
 	drawTiles(windowSurfaceObj)
 
 	char.draw(windowSurfaceObj)
+	
+	generateBaddies(char,pygame.sprite.Group()).draw(windowSurfaceObj)
 
 	for event in pygame.event.get():
 		if event.type == QUIT:

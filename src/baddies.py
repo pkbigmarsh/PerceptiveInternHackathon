@@ -15,10 +15,11 @@ def generateBaddies(char, map):
 	baddies = pygame.sprite.Group()
 
 	for b in range(1,10):
-		posx, posy = random.randint(0,WIDTH), random.randint(0,HEIGHT)
+		posx, posy = randint(0,WIDTH), randint(0,HEIGHT)
 		b = Sprite('../resources/baddie.png')
 		b.set_position(posx, posy)
 		if spritecollideany(b, noBaddies) == None:
 			baddies.add(b)
 			b += 1
 
+	return baddies
