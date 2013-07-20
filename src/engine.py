@@ -2,13 +2,19 @@
 # https://github.com/pkbigmarsh/PerceptiveInternHackathon
 #
 
+## !! ----- Import Statements ----- !! ##
 import pygame, sys
 from pygame.locals import *
 
+## !! ----- Constants ----- !! ##
+FRAME_RATE = 30
+SCREEN_SIZE = WIDTH, HEIGHT = 800, 400
+
+## !! ----- Game Logic ----- !! ##
 pygame.init()
 fpsClock = pygame.time.Clock()
 
-windowSurfaceObj = pygame.display.set_mode((800, 600))
+windowSurfaceObj = pygame.display.set_mode(SCREEN_SIZE)
 pygame.display.set_caption('Hackathon')
 
 charImg = pygame.image.load('./resources/char.png')
