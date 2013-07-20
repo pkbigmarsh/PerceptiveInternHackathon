@@ -8,7 +8,7 @@ from pygame.locals import *
 from sprite import *
 from collision import *
 from character import *
-from baddies import *
+from Baddies import *
 from AnimatedSprite import *
 
 from constants import *
@@ -34,7 +34,7 @@ initTiles()
 loadMap('../resources/map1.csv')
 
 whiteColor = pygame.Color(255,255,255)
-baddy = baddies()
+baddy = Baddies()
 print char
 print impassables()
 baddy.generateBaddies(char,impassables())
