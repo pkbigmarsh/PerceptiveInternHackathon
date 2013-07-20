@@ -20,4 +20,3 @@ class SpriteSheet():
 		image = pygame.Surface(self.tile_rect.size).convert_alpha()
 		image.blit(self.image, (0,0), self.tile_rect)
 		return image
-
