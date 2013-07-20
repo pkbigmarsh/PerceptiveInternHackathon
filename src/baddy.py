@@ -1,10 +1,9 @@
 #baddy.py
-
-from sprite import Sprite
+import pygame
+from sprite import *
 from random import randint
 
-class baddy(Sprite):
-	
-	def __init__(self):
-		pygame.sprite.Group.__init__(self)
+class Baddy(Sprite):
+	def __init__(self, filepath):
+		Sprite.__init__(self, filepath)
 
