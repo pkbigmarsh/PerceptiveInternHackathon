@@ -47,6 +47,8 @@ while True:
 	
 	drawTiles(windowSurfaceObj)
 
+	drawItems(windowSurfaceObj)
+
 	char.update(windowSurfaceObj)
 	
 	baddy.update(windowSurfaceObj)
