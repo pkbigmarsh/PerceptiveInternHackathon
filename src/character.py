@@ -6,7 +6,7 @@ class Character:
 	def __init__(self):
 		self.sprite = Sprite('../resources/char.png')
 		self.health = 10
-		self.speed = 40
+		self.speed = 10
 
 	def move(self, direction):
 		#pos = self.sprite.getPosition()
