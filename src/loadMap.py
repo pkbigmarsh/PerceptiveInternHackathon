@@ -45,12 +45,13 @@ def loadMap(filename):
 			if len(metadata) > 0:
 				if metadata[0] == "player":
 					#	TODO Move play here if the game just started
-					print()
+					pass
 				elif metadata[0] == "baddy":
 					#	TODO Put baddy here
-					print()
+					pass
 				elif metadata[0] == "item":
-					Item("../resources/coin.png").set_position(x, y)
+					if metadata[1] == "coin":
+						Item("../resources/coin.png").set_position(x, y)
 
 			x += TILE_SIZE
 		y += TILE_SIZE

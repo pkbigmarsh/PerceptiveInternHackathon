@@ -57,18 +57,6 @@ while True:
 		if event.type == QUIT:
 			pygame.quit()
 			sys.exit()
-			# if event.key == K_LEFT:
-			# 	char.move(WEST)
-			# 	sprite.stop()
-			# if event.key == K_RIGHT:
-			# 	char.move(EAST)
-			# 	sprite.stop()
-			# if event.key == K_UP:
-			# 	char.move(NORTH)
-			# 	sprite.stop()
-			# if event.key == K_DOWN:
-			# 	char.move(SOUTH)
-			# 	sprite.stop()
 		if event.type == KEYDOWN:
 			if event.key == K_DOWN:
 				moveDown = True
