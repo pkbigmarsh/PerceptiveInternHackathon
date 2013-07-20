@@ -19,11 +19,6 @@ from constants import *
 import loadMap
 from loadMap import *
 
-## !! ----- Constants ----- !! ##
-FRAME_RATE = 30
-SCREEN_SIZE = WIDTH, HEIGHT = 800, 600
-TILE_SIZE = 20
-
 ## !! ----- Game Logic ----- !! ##
 pygame.init()
 fpsClock = pygame.time.Clock()
@@ -34,7 +29,7 @@ pygame.display.set_caption('Hackathon')
 char = Character()
 
 initTiles()
-loadMap('../resources/testLevel.txt')
+loadMap('../resources/map1.csv')
 
 whiteColor = pygame.Color(255,255,255)
 
