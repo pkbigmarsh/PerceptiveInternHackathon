@@ -21,14 +21,14 @@ def loadMap(filename):
 		x = 0
 		values = line.split(',')
 		for char in values:
-			if char == '#':
+			if char in tileImages:
 				newTile = {
 				'rect': pygame.Rect(x, y, x + TILE_SIZE, y + TILE_SIZE),
 				'surface': pygame.transform.scale(tileImages[char], (TILE_SIZE, TILE_SIZE)),
 				'type': "grass"
 				}
 				tileData.append(newTile)
-			if char == ' ':
+			if char == 'B':
 				newTile = {
 				'rect': pygame.Rect(x, y, x + TILE_SIZE, y + TILE_SIZE),
 				'surface': pygame.transform.scale(tileImages[char], (TILE_SIZE, TILE_SIZE)),
@@ -45,3 +45,6 @@ def drawTiles(surface):
 def initTiles():
 	tileImages['#'] = pygame.image.load('../resources/white.png')
 	tileImages[' '] = pygame.image.load('../resources/black.png')
+	tileImages['G'] = pygame.image.load('../resources/grass.png')
+	tileImages['R'] = pygame.image.load('../resources/rock.png')
+	tileImages['B'] = pygame.image.load('../resources/bush.png')
