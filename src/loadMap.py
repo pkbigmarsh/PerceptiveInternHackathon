@@ -17,7 +17,8 @@ def loadMap(filename):
 	y = 0
 	for line in lines:
 		x = 0
-		for char in line:
+		values = line.split(',')
+		for char in values:
 			if char == '#':
 				newTile = {
 				'rect': pygame.Rect(x, y, x + 20, y + 20),
