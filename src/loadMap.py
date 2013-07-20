@@ -6,6 +6,8 @@
 import pygame, sys
 from pygame.locals import *
 
+from constants import *
+
 tileData = []
 tileImages = dict()
 
@@ -21,20 +23,20 @@ def loadMap(filename):
 		for char in values:
 			if char == '#':
 				newTile = {
-				'rect': pygame.Rect(x, y, x + 20, y + 20),
-				'surface': pygame.transform.scale(tileImages[char], (20, 20)),
+				'rect': pygame.Rect(x, y, x + TILE_SIZE, y + TILE_SIZE),
+				'surface': pygame.transform.scale(tileImages[char], (TILE_SIZE, TILE_SIZE)),
 				'type': "grass"
 				}
 				tileData.append(newTile)
 			if char == ' ':
 				newTile = {
-				'rect': pygame.Rect(x, y, x + 20, y + 20),
-				'surface': pygame.transform.scale(tileImages[char], (20, 20)),
+				'rect': pygame.Rect(x, y, x + TILE_SIZE, y + TILE_SIZE),
+				'surface': pygame.transform.scale(tileImages[char], (TILE_SIZE, TILE_SIZE)),
 				'type': "rock"
 				}
 				tileData.append(newTile)
-			x += 20
-		y += 20
+			x += TILE_SIZE
+		y += TILE_SIZE
 
 def drawTiles(surface):
 	for tile in tileData:

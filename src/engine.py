@@ -10,7 +10,7 @@ from character import *
 
 sys.path.append('./constants')
 
-from DIRECTIONS import *
+from constants import *
 
 import loadMap
 from loadMap import *
