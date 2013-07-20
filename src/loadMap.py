@@ -30,16 +30,10 @@ def loadMap(filename):
 				'type': "grass"
 				}
 				tileData.append(newTile)
-			if char == 'B':
-				newTile = {
-				'rect': pygame.Rect(x, y, x + TILE_SIZE, y + TILE_SIZE),
-				'surface': pygame.transform.scale(tileImages[char], (TILE_SIZE, TILE_SIZE)),
-				'type': "rock"
-				}
-				tileData.append(newTile)
-				b = Sprite('../resources/bush.png')
-				b.set_position(x, y)
-				impass.add(b)
+				if char == 'B':
+					b = Sprite('../resources/bush.png')
+					b.set_position(x, y)
+					impass.add(b)
 			x += TILE_SIZE
 		y += TILE_SIZE
 
