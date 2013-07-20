@@ -53,18 +53,42 @@ while True:
 			pygame.quit()
 			sys.exit()
 		elif event.type == KEYDOWN:
-			if event.key == K_LEFT:
-				char.move(WEST)
-				sprite.stop()
-			if event.key == K_RIGHT:
-				char.move(EAST)
-				sprite.stop()
-			if event.key == K_UP:
-				char.move(NORTH)
-				sprite.stop()
-			if event.key == K_DOWN:
-				char.move(SOUTH)
-				sprite.stop()
+			# if event.key == K_LEFT:
+			# 	char.move(WEST)
+			# 	sprite.stop()
+			# if event.key == K_RIGHT:
+			# 	char.move(EAST)
+			# 	sprite.stop()
+			# if event.key == K_UP:
+			# 	char.move(NORTH)
+			# 	sprite.stop()
+			# if event.key == K_DOWN:
+			# 	char.move(SOUTH)
+			# 	sprite.stop()
+			if event.type == KEYDOWN:
+				if event.key == K_DOWN:
+					moveLeft = False
+					moveRight = True
+					moveUp = True
+					moveDown = False
+				if event.key == K_UP:
+					moveLeft = False
+					moveRight = False
+					moveDown = True
+					moveUp = False
+			if event.type == KEYUP:
+				if event.key == K_ESCAPE:
+					terminate()
+				if event.key == K_UP:
+					moveLeft = False
+					moveRight = False
+					moveDown = False
+					moveUp = False
+				if event.key == K_DOWN:
+					moveLeft = False
+					moveRight = False
+					moveUp = False
+					moveDown = False
 
 	sprite.draw(windowSurfaceObj)
 	pygame.display.update()
