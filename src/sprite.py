@@ -2,6 +2,7 @@ import pygame
 
 class Sprite(pygame.sprite.Sprite):
 	def __init__(self, filepath):
+		pygame.sprite.Sprite.__init__(self)
 		self.filepath = filepath
 		self.image = pygame.image.load(filepath)
 		self.rect = self.image.get_rect()
