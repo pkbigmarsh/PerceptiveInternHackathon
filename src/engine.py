@@ -68,7 +68,8 @@ while True:
 				moveRight = True
 		if event.type == KEYUP:
 			if event.key == K_ESCAPE:
-				terminate()
+				pygame.quit()
+				sys.exit()
 			if event.key == K_UP:
 				moveUp = False
 			if event.key == K_DOWN:
