@@ -42,7 +42,7 @@ while True:
 
 	char.draw(windowSurfaceObj)
 	
-	#generateBaddies(char,pygame.sprite.Group()).draw(windowSurfaceObj)
+	generateBaddies(char,impassables()).draw(windowSurfaceObj)
 
 	for event in pygame.event.get():
 		if event.type == QUIT:
