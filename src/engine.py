@@ -7,9 +7,9 @@ import pygame, sys
 from pygame.locals import *
 from sprite import *
 from collision import *
-from Character import *
-from Baddies import *
-from AnimatedSprite import *
+from character import *
+from baddies import *
+from animatedSprite import *
 
 from constants import *
 
