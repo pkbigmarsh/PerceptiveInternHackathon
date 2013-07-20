@@ -32,6 +32,10 @@ initTiles()
 loadMap('../resources/map1.csv')
 
 whiteColor = pygame.Color(255,255,255)
+baddy = baddies()
+print char
+print impassables()
+baddy.generateBaddies(char,impassables())
 
 while True:
 	windowSurfaceObj.fill(whiteColor)
@@ -40,7 +44,7 @@ while True:
 
 	char.draw(windowSurfaceObj)
 	
-	generateBaddies(char,impassables()).draw(windowSurfaceObj)
+	baddy.update(windowSurfaceObj)
 
 	for event in pygame.event.get():
 		if event.type == QUIT:
