@@ -20,7 +20,7 @@ class baddies(pygame.sprite.Group):
 		
 		i = 1
 		while i <= 10:
-			b = Sprite('../resources/baddie.png')
+			b = baddy('../resources/baddie.png')
 			posx, posy = randint(0,800-b.rect.width), randint(0,600-b.rect.height)
 			b.set_position(posx, posy)
 			b.group = 0
