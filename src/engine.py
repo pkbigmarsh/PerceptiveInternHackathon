@@ -5,6 +5,7 @@
 ## !! ----- Import Statements ----- !! ##
 import pygame, sys
 from pygame.locals import *
+from sprite import *
 
 ## !! ----- Constants ----- !! ##
 FRAME_RATE = 30
@@ -17,16 +18,16 @@ fpsClock = pygame.time.Clock()
 windowSurfaceObj = pygame.display.set_mode(SCREEN_SIZE)
 pygame.display.set_caption('Hackathon')
 
-charImg = pygame.image.load('./resources/char.png')
-charRect = charImg.get_rect()
-charx, chary = 0, 0
+char = Sprite('../resources/char.png')
+char.rect.x = 0
+char.rect.y = 0
 
 whiteColor = pygame.Color(255,255,255)
 
 while True:
 	windowSurfaceObj.fill(whiteColor)
 	
-	windowSurfaceObj.blit(charImg, (charx, chary))
+	char.draw(windowSurfaceObj)
 
 	for event in pygame.event.get():
 		if event.type == QUIT:
