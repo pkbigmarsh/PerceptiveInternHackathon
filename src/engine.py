@@ -68,13 +68,23 @@ while True:
 			if event.type == KEYDOWN:
 				if event.key == K_DOWN:
 					moveLeft = False
-					moveRight = True
-					moveUp = True
-					moveDown = False
+					moveRight = False
+					moveUp = False
+					moveDown = True
 				if event.key == K_UP:
 					moveLeft = False
 					moveRight = False
-					moveDown = True
+					moveDown = False
+					moveUp = True
+				if event.key == K_LEFT:
+					moveLeft = True
+					moveRight = False
+					moveUp = False
+					moveDown = False
+				if event.key == K_RIGHT:
+					moveLeft = False
+					moveRight = True
+					moveDown = False
 					moveUp = False
 			if event.type == KEYUP:
 				if event.key == K_ESCAPE:
@@ -89,7 +99,28 @@ while True:
 					moveRight = False
 					moveUp = False
 					moveDown = False
-
+				if event.key == K_LEFT:
+					moveLeft = False
+					moveRight = False
+					moveUp = False
+					moveDown = False
+				if event.key == K_RIGHT:
+					moveLeft = False
+					moveRight = False
+					moveDown = False
+					moveUp = False
+			if moveUp:
+				char.move(NORTH)
+				# sprite.stop()
+			if moveDown:
+				char.move(SOUTH)
+				# sprite.stop()
+			if moveLeft:
+				char.move(WEST)
+				# sprite.stop()
+			if moveRight:
+				char.move(EAST)
+				# sprite.stop()
 	sprite.draw(windowSurfaceObj)
 	pygame.display.update()
 	fpsClock.tick(30)
