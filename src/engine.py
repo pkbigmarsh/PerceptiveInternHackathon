@@ -6,16 +6,18 @@
 import pygame, sys
 from pygame.locals import *
 from sprite import *
+from collision import *
 from character import *
+from baddies import *
 
-sys.path.append('./constants')
+# sys.path.append('./constants')
 
-from DIRECTIONS import *
+from constants import *
 
 ## !! ----- Constants ----- !! ##
-FRAME_RATE = 30
-SCREEN_SIZE = WIDTH, HEIGHT = 800, 400
-TILE_SIZE = 20
+
+import loadMap
+from loadMap import *
 
 ## !! ----- Game Logic ----- !! ##
 pygame.init()
@@ -26,12 +28,19 @@ pygame.display.set_caption('Hackathon')
 
 char = Character()
 
+initTiles()
+loadMap('../resources/map1.csv')
+
 whiteColor = pygame.Color(255,255,255)
 
 while True:
 	windowSurfaceObj.fill(whiteColor)
 	
+	drawTiles(windowSurfaceObj)
+
 	char.draw(windowSurfaceObj)
+	
+	generateBaddies(char,pygame.sprite.Group()).draw(windowSurfaceObj)
 
 	for event in pygame.event.get():
 		if event.type == QUIT:
