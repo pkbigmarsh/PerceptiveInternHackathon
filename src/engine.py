@@ -8,13 +8,13 @@ from pygame.locals import *
 from sprite import *
 from character import *
 
-sys.path.append('./constants')
+# sys.path.append('./constants')
 
-from DIRECTIONS import *
+from constants import *
 
 ## !! ----- Constants ----- !! ##
 FRAME_RATE = 30
-SCREEN_SIZE = WIDTH, HEIGHT = 800, 400
+SCREEN_SIZE = WIDTH, HEIGHT
 TILE_SIZE = 20
 
 ## !! ----- Game Logic ----- !! ##
