@@ -20,6 +20,7 @@ def loadMap(filename):
 	y = 0
 	for line in lines:
 		x = 0
+		line = line.replace('\n', '')
 		values = line.split(',')
 		for char in values:
 			if char in tileImages:
