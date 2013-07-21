@@ -10,7 +10,7 @@ from collision import *
 from character import *
 from baddies import *
 from animatedSprite import *
-
+from metaMap import *
 from constants import *
 
 ## !! ----- Constants ----- !! ##
@@ -36,7 +36,7 @@ sprite.play_row(0)
 
 initTiles()
 loadMap('../resources/map1.csv')
-
+metaMap('../resources/level1.csv')
 whiteColor = pygame.Color(255,255,255)
 baddy = Baddies()
 impass = impassables()

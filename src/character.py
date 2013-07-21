@@ -1,7 +1,7 @@
 import pygame
 from sprite import *
 from constants import *
-
+from metaMap import *
 class Character(Sprite):
 	def __init__(self, filepath, health, speed):
 		Sprite.__init__(self, '../resources/char.png')
@@ -17,15 +17,16 @@ class Character(Sprite):
 		newX = curX + (direction[0] * self.speed)
 		newY = curY + (direction[1] * self.speed)
 		# Detect if near any edges/walls
-		if newX <= 0:
-			newX = 0 
-		elif newX >= WIDTH - charWidth:
-			newX = WIDTH - charWidth
-
+		if newX <= 4:
+			newX = WIDTH - charWidth - 5
+			loadNext('left')
+		elif newX >= WIDTH - charWidth -4:
+			newX = 5
+			loadNext('right')
 		if newY <= 0:
-			newY = 0 
+			newY = HEIGHT - charHeight 
 		elif newY >= HEIGHT - charHeight:
-			newY = HEIGHT - charHeight
+			newY = 0
 
 		self.set_position(newX, newY)
 		# Detect any impassable objects or baddies
