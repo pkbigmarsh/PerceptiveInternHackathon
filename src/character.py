@@ -16,7 +16,6 @@ class Character(Sprite):
 		curY = self.rect.y
 		newX = curX + (direction[0] * self.speed)
 		newY = curY + (direction[1] * self.speed)
-
 		# Detect if near any edges/walls
 		if newX <= 0:
 			newX = 0 
@@ -30,9 +29,10 @@ class Character(Sprite):
 
 		self.set_position(newX, newY)
 		# Detect any impassable objects or baddies
-		if pygame.sprite.spritecollideany(self, impassables):
+		if pygame.sprite.spritecollide(self, impassables, False):
+			# print "collided with impass"
 			self.set_position(curX, curY)
-		if pygame.sprite.spritecollideany(self, baddies):
+		if pygame.sprite.spritecollide(self, baddies, False):
 			self.set_position(curX, curY)
 
 	def update(self, window_surface):

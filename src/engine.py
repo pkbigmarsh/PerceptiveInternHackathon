@@ -42,6 +42,9 @@ baddy = Baddies()
 impass = impassables()
 baddy.generateBaddies(char,impass)
 
+
+print char.rect.width
+print char.rect.height
 while True:
 	windowSurfaceObj.fill(whiteColor)
 	
@@ -51,7 +54,7 @@ while True:
 
 	char.update(windowSurfaceObj)
 	
-	baddy.update(windowSurfaceObj)
+	# baddy.update(windowSurfaceObj)
 
 	for event in pygame.event.get():
 		if event.type == QUIT:
@@ -90,6 +93,8 @@ while True:
 	if moveRight:
 		char.move(EAST, impass, baddy)
 		# sprite.stop()
+	baddy.refresh(windowSurfaceObj, impassables)
+	baddy.draw(windowSurfaceObj)
 	sprite.draw(windowSurfaceObj)
 	pygame.display.update()
 	fpsClock.tick(30)

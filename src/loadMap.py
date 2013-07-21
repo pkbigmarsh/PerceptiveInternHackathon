@@ -37,10 +37,14 @@ def loadMap(filename):
 				if tilePart == 'B':
 					b = Sprite('../resources/bush.png')
 					b.set_position(x, y)
+					b.rect.width = 20 #height and width are not setting properly. not sure why
+					b.rect.height = 20 
 					impass.add(b)
 				if tilePart == 'R':
 					b = Sprite('../resources/rock.png')
 					b.set_position(x, y)
+					b.rect.width = 20
+					b.rect.height = 20
 					impass.add(b)
 			if len(metadata) > 0:
 				if metadata[0] == "player":

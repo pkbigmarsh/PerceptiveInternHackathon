@@ -3,6 +3,7 @@
 from random import randint
 from sprite import *
 from baddy import *
+from loadMap import *
 import pygame
 class Baddies(pygame.sprite.Group):
 	def __init__(self):
@@ -25,12 +26,19 @@ class Baddies(pygame.sprite.Group):
 			b = Baddy('../resources/baddie.png')
 			posx, posy = randint(0,800-b.rect.width), randint(0,600-b.rect.height)
 			b.set_position(posx, posy)
+			b.width = 10
+			b.height = 30
 			b.group = 0
 			if pygame.sprite.spritecollideany(b, noBaddies) == None and pygame.sprite.spritecollideany(b, self) == None:
 				self.add(b)
 				i += 1
 
 		# return baddies
+	def refresh(self, window_surface, impass):
+		self.update(window_surface, impass)
+		self.draw(window_surface)
+	# def update(self, windowSurfaceObj):
+	# 	# for i in len(self.sprites()):
 
-	def update(self, windowSurfaceObj):
-		self.draw(windowSurfaceObj)
+	# 	self.draw(windowSurfaceObj)
+	
