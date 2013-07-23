@@ -2,40 +2,123 @@
 #	Used to get a string of text entered by the user
 
 class keyboardString(Object):
-	__init__():
+	def __init__():
 		this.string = ""
-		this.cursorPos = 0
+		this.start = 0
+		this.end = 0
+		this.cursor = 0
 
-	addKeyPress(keyCode):	#	THIS METHOD NOT DONE YET
-		k = ""
-		stringAsList = list(string)
-		if key.get_mods() & KMOD_SHIFT != 0:
-			if keyCode in ks:
-				stringAsList[cursorPos:cursorPos] = ks[keyCode]
-				string = "".join(stringAsList)
+	def addKeyPress(keyCode):	#	THIS METHOD NOT DONE YET
+
+		if key.get_mods() & KMOD_CTRL != 0:
+			k = ""
+			if (key.get_mods() & KMOD_SHIFT != 0):
+				if keyCode in ks:
+					k = ks[keyCode]
+				if keyCode in kn:
+					k = kn[keyCode]
+			else:
+				if keyCode in kn:
+					k = kn[keyCode]
+			if k != "":
+				string = string[0:start] + [k] + string[end:]
+				start += 1
+				cursor = end = start
 				return
-			if keyCode in kn:
-				stringAsList[cursorPos:cursorPos] = kn[keyCode]
-				string = "".join(stringAsList)
-				return
-		else:
-			if keyCode in kn:
-				stringAsList[cursorPos:cursorPos] = kn[keyCode]
-				string = "".join(stringAsList)
-				return
+
 		if keyCode == K_BACKSPACE:
-			if cursorPos > 0:
-				string = string[0:cursorPos - 1] + string[cursorPos:]
+			if start == end:
+				string = string[0:start - 1] + string[end:]
+				start -= 1
+				cursor = end = start
+			else:
+				string = string[0:start] + string[end:]
+				cursor = end = start
 		elif keyCode == K_DELETE:
-			string = string[0:cursorPos] + string[CursorPos + 1:]
+			if start == end:
+				string = string[0:start] + string[end + 1:]
+			else:
+				string = string[0:start] + string[end:]
+				cursor = end = start
 
-	setCursorPosition(position):
+
+		elif keyCode == K_RIGHT:
+			if key.get_mods() & KMOD_SHIFT != 0:
+				if start == end:
+					end += 1
+					if end > len(string):
+						end = len(string)
+					cursor = end
+				else:
+					if cursor == start:
+						start += 1
+						cursor = start
+					else:
+						end += 1
+						if end > len(string):
+							end = len(string)
+						cursor = end
+			else:
+				if start == end:
+					start += 1
+					cursor = end = start
+				else:
+					cursor = start = end
+
+
+		elif keyCode == K_LEFT:
+			if key.get_mods() & KMOD_SHIFT != 0:
+				if start == end:
+					start -= 1
+					if (start < 0):
+						start = 0
+					cursor = start
+				else:
+					if cursor == start:
+						start -= 1
+						if (start < 0):
+							start = 0
+						cursor = start
+					else:
+						start += 1
+						cursor = end
+			else:
+				if start == end:
+					start += 1
+					cursor = end = start
+				else:
+					cursor = start = end
+
+		elif keyCode == K_c && (key.get_mods() & KMOD_CTRL != 0):
+			#	TODO copy text
+		elif keyCode == K_v && (key.get_mods() & KMOD_CTRL != 0):
+			#	TODO paste text
+		elif keyCode == K_x && (key.get_mods() & KMOD_CTRL != 0):
+			#	TODO cut text
+
+	def setCursorPosition(position):
 		if position < 0:
-			cursorPos = 0
+			cursor = start = end = 0
 		elif position > len(string):
-			cursorPos = len(string)
+			cursor = start = end = len(string)
 		else:
-			cursorPos = position
+			cursor = start = end = position
+
+	def setSelection(startDrag, endDrag):
+		if endDrag > startDrag:
+			start = startDrag
+			end = endDrag
+		else:
+			start = endDrag
+			end = startDrag
+		if start < 0:
+			start = 0
+		if end > len(string):
+			end = len(string)
+		if endDrag > startDrag:
+			cursor = end
+		else:
+			cursor = start
 
 kn = dict()
 ks = dict()
@@ -84,6 +167,7 @@ def initKeyStrings:
 	ks[K_BACKQUOTE] = '~'
 
 	kn[K_ENTER] = '\n'
+	kn[K_TAB] = '\t'
 
 	kn[K_KP_PERIOD] = '.'
 	kn[K_KP_ENTER] = '\n'
@@ -91,4 +175,3 @@ def initKeyStrings:
 	kn[K_KP_MINUS] = '-'
 	kn[K_KP_MULTIPLY] = '*'
 	kn[K_KP_DIVIDE] = '/'
-
