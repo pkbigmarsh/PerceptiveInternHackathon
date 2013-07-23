@@ -13,16 +13,7 @@ tileData = []
 tileImages = dict()
 impass = pygame.sprite.Group()
 
-def clearMap():
-	tileData = []
-	tileImages = dict()
-	impass = pygame.sprite.Group()
-
 def loadMap(filename):
-	# tileData = []
-	# tileImages = dict()
-	# impass = pygame.sprite.Group()
-	clearMap()
 	del tileData[:]
 	tileData[:] = []
 	impass.empty()
