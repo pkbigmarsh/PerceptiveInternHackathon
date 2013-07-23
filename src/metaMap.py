@@ -29,9 +29,17 @@ def loadNext(direct):
 	for line in lines:
 		line = line.replace('\n', '')
 		values = line.split(',')
-	constants.MAP = constants.MAP + 1
-	if constants.MAP > 1:
+	# constants.MAP = constants.MAP + 1
+	# if constants.MAP > 1:
+	# 	constants.MAP = 0
+	if direct == "left":
+		constants.MAP -= 1
+	if direct == "right":
+		constants.MAP += 1
+	if constants.MAP < 0:
 		constants.MAP = 0
+	if constants.MAP > len(lines):
+		constants.MAP = len(lines)
 	print constants.MAP
 	# print values[0]
 	# print '../resources/' + values[0] + '.csv'
