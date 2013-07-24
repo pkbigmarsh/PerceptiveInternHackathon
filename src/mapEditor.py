@@ -27,7 +27,7 @@ initTiles()
 whiteColor = pygame.Color(255,255,255)
 
 pygame.font.init()
-fontNormal = pygame.font.Font("../resources/font/Grantham Roman.ttf", 24)
+fontNormal = pygame.font.Font("../resources/font/Walkway rounded.ttf", 24)
 box1 = TextBox(0, 0, 400, 32, fontNormal)
 box1.value.string = "Bla bla"
 
