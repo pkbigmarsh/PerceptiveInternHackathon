@@ -1,132 +1,154 @@
 #	keyboardString.py
 #	Used to get a string of text entered by the user
+import pygame, sys
+from pygame.locals import *
 
-class keyboardString(Object):
-	def __init__():
-		this.string = ""
-		this.start = 0
-		this.end = 0
-		this.cursor = 0
+class keyboardString(object):
+	def __init__(self):
+		self.string = ""
+		self.start = 0
+		self.end = 0
+		self.cursor = 0
 
-	def addKeyPress(keyCode):	#	THIS METHOD NOT DONE YET
-
-		if key.get_mods() & KMOD_CTRL != 0:
+	def addKeyPress(self, keyCode):	#	THIS METHOD NOT DONE YET
+		keyMods = pygame.key.get_mods()
+		if keyMods & KMOD_CTRL == 0:
 			k = ""
-			if (key.get_mods() & KMOD_SHIFT != 0):
-				if keyCode in ks:
+			if (keyMods & KMOD_SHIFT != 0):
+				if keyCode in ks.keys():
 					k = ks[keyCode]
-				if keyCode in kn:
+				elif keyCode in kn.keys():
 					k = kn[keyCode]
 			else:
-				if keyCode in kn:
+				if keyCode in kn.keys():
 					k = kn[keyCode]
-			if k != "":
-				string = string[0:start] + [k] + string[end:]
-				start += 1
-				cursor = end = start
+			if len(k) > 0:
+				self.string = self.string[0:self.start] + k + self.string[self.end:]
+				self.start += 1
+				self.cursor = self.end = self.start
 				return
 
 		if keyCode == K_BACKSPACE:
-			if start == end:
-				string = string[0:start - 1] + string[end:]
-				start -= 1
-				cursor = end = start
+			if self.start == self.end:
+				if self.start != 0:
+					self.string = self.string[0:self.start - 1] + self.string[self.end:]
+					self.start -= 1
+					if self.start < 0:
+						self.start = 0
+					self.cursor = self.end = self.start
 			else:
-				string = string[0:start] + string[end:]
-				cursor = end = start
+				self.string = self.string[0:self.start] + self.string[self.end:]
+				self.cursor = self.end = self.start
 		elif keyCode == K_DELETE:
-			if start == end:
-				string = string[0:start] + string[end + 1:]
+			if self.start == self.end:
+				self.string = self.string[0:self.start] + self.string[self.end + 1:]
 			else:
-				string = string[0:start] + string[end:]
-				cursor = end = start
+				self.string = self.string[0:self.start] + self.string[self.end:]
+				self.cursor = self.end = self.start
 
 
 		elif keyCode == K_RIGHT:
-			if key.get_mods() & KMOD_SHIFT != 0:
-				if start == end:
-					end += 1
-					if end > len(string):
-						end = len(string)
-					cursor = end
+			if keyMods & KMOD_SHIFT != 0:
+				if self.start == self.end:
+					self.end += 1
+					if self.end > len(self.string):
+						self.end = len(self.string)
+					self.cursor = self.end
 				else:
-					if cursor == start:
-						start += 1
-						cursor = start
+					if self.cursor == self.start:
+						self.start += 1
+						self.cursor = self.start
 					else:
-						end += 1
-						if end > len(string):
-							end = len(string)
-						cursor = end
+						self.end += 1
+						if self.end > len(self.string):
+							self.end = len(self.string)
+						self.cursor = self.end
 			else:
-				if start == end:
-					start += 1
-					cursor = end = start
+				if self.start == self.end:
+					self.start += 1
+					if self.start > len(self.string):
+						self.start = len(self.string)
+					self.cursor = self.end = self.start
 				else:
-					cursor = start = end
+					self.cursor = self.start = self.end
 
 
 		elif keyCode == K_LEFT:
-			if key.get_mods() & KMOD_SHIFT != 0:
-				if start == end:
-					start -= 1
-					if (start < 0):
-						start = 0
-					cursor = start
+			if keyMods & KMOD_SHIFT != 0:
+				if self.start == self.end:
+					self.start -= 1
+					if (self.start < 0):
+						self.start = 0
+					self.cursor = self.start
 				else:
-					if cursor == start:
-						start -= 1
-						if (start < 0):
-							start = 0
-						cursor = start
+					if self.cursor == self.start:
+						self.start -= 1
+						if (self.start < 0):
+							self.start = 0
+						self.cursor = self.start
 					else:
-						start += 1
-						cursor = end
+						self.start += 1
+						self.cursor = self.end
 			else:
-				if start == end:
-					start += 1
-					cursor = end = start
+				if self.start == self.end:
+					self.start -= 1
+					if (self.start < 0):
+						self.start = 0
+					self.cursor = self.end = self.start
 				else:
-					cursor = start = end
+					self.cursor = self.end = self.start
 
-		elif keyCode == K_c && (key.get_mods() & KMOD_CTRL != 0):
-			#	TODO copy text
-		elif keyCode == K_v && (key.get_mods() & KMOD_CTRL != 0):
-			#	TODO paste text
-		elif keyCode == K_x && (key.get_mods() & KMOD_CTRL != 0):
-			#	TODO cut text
+		elif keyCode == K_HOME:
+			if keyMods & KMOD_SHIFT != 0:
+				self.start = 0
+			else:
+				self.cursor = self.end = self.start = 0
 
-	def setCursorPosition(position):
+		elif keyCode == K_END:
+			if keyMods & KMOD_SHIFT != 0:
+				self.end = len(self.string)
+			else:
+				self.cursor = self.start = self.end = len(self.string)
+
+		elif keyCode == K_c and (keyMods & KMOD_CTRL != 0):
+			pass	#	TODO copy text
+		elif keyCode == K_v and (keyMods & KMOD_CTRL != 0):
+			pass	#	TODO paste text
+		elif keyCode == K_x and (keyMods & KMOD_CTRL != 0):
+			pass	#	TODO cut text
+
+
+	def setCursorPosition(self, position):
 		if position < 0:
-			cursor = start = end = 0
-		elif position > len(string):
-			cursor = start = end = len(string)
+			self.cursor = self.start = self.end = 0
+		elif position > len(self.string):
+			self.cursor = self.start = self.end = len(self.string)
 		else:
-			cursor = start = end = position
+			self.cursor = self.start = self.end = position
 
-	def setSelection(startDrag, endDrag):
+	def setSelection(self, startDrag, endDrag):
 		if endDrag > startDrag:
-			start = startDrag
-			end = endDrag
+			self.start = startDrag
+			self.end = endDrag
 		else:
-			start = endDrag
-			end = startDrag
-		if start < 0:
-			start = 0
-		if end > len(string):
-			end = len(string)
+			self.start = endDrag
+			self.end = startDrag
+		if self.start < 0:
+			self.start = 0
+		if self.end > len(self.string):
+			self.end = len(self.string)
 		if endDrag > startDrag:
-			cursor = end
+			self.cursor = self.end
 		else:
-			cursor = start
+			self.cursor = self.start
 
 kn = dict()
 ks = dict()
 
-def initKeyStrings:
+def initKeyStrings():
 	for charValue in range(K_a, K_z):
 		kn[charValue] = chr(charValue)
-		ks[charValue] = char(charValue - 32)
+		ks[charValue] = chr(charValue - 32)
 	for charValue in range(K_0, K_9):
 		kn[charValue] = chr(charValue)
 	for charValue in range(K_KP0, K_KP9):
@@ -166,8 +188,9 @@ def initKeyStrings:
 	kn[K_BACKQUOTE] = chr(K_BACKQUOTE)
 	ks[K_BACKQUOTE] = '~'
 
-	kn[K_ENTER] = '\n'
+	kn[K_RETURN] = '\n'
 	kn[K_TAB] = '\t'
+	kn[K_SPACE] = ' '
 
 	kn[K_KP_PERIOD] = '.'
 	kn[K_KP_ENTER] = '\n'
