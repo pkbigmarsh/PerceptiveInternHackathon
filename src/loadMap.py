@@ -13,6 +13,8 @@ tileData = []
 tileImages = dict()
 impass = pygame.sprite.Group()
 
+backgroundImage = pygame.surface.Surface(SCREEN_SIZE)
+
 def clearMap():
 	tileData = []
 	tileImages = dict()
@@ -71,10 +73,11 @@ def loadMap(filename):
 
 			x += TILE_SIZE
 		y += TILE_SIZE
+	for tile in tileData:
+		backgroundImage.blit(tile['surface'], tile['rect'])
 
 def drawTiles(surface):
-	for tile in tileData:
-		surface.blit(tile['surface'], tile['rect'])
+	surface.blit(backgroundImage, (0, 0));
 
 def initTiles():
 	tileImages['#'] = pygame.image.load('../resources/white.png')
