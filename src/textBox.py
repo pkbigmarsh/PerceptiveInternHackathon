@@ -19,9 +19,35 @@ class TextBox(object):
 		self.font = font
 		self.value = keyboardString()
 		self.drawFontOffset = (h - font.get_height()) / 2
+		self.focused = False
+		self.start = 0
 
-	def click(self, x, y):
-		pass
+	def getCursorPositionFromPosition(self, x):
+		#	Font metrics
+		x -= self.x + 2
+		ans = 0
+		off = 0
+		for size in self.font.metrics(self.value.string):
+			if x < off + size[4] // 2:
+				break
+			off += size[4]
+			ans += 1
+		return ans
+
+
+	def mouseDown(self, x, y):
+		self.focused = False
+		if (x > self.x and
+			y > self.y and
+			x < self.x + self.w and
+			y < self.y + self.h):
+			self.focused = True
+			self.start = self.getCursorPositionFromPosition(x)
+
+
+	def mouseHeld(self, x):
+		if self.focused:
+			self.value.setSelection(self.start, self.getCursorPositionFromPosition(x))
 
 	def keyEvent(self, keyCode):
 		self.value.addKeyPress(keyCode)

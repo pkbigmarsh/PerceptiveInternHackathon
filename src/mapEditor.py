@@ -35,6 +35,8 @@ initKeyStrings()
 
 keyMap = dict()
 keyPressed = list()
+buttonDown = dict()
+buttonDown[1] = False
 
 pygame.key.set_mods(0)
 
@@ -51,15 +53,25 @@ while True:
 		if event.type == QUIT:
 			pygame.quit()
 			sys.exit()
-		if event.type == KEYDOWN:
+		elif event.type == KEYDOWN:
 			box1.keyEvent(event.key)
 			keyMap[event.key] = 0
 			keyPressed.append(event.key)
-		if event.type == KEYUP:
+		elif event.type == KEYUP:
 			if event.key in keyPressed:
 				keyPressed.remove(event.key)
-			
+		elif event.type == MOUSEBUTTONDOWN:
+			if event.button == 1:
+				box1.mouseDown(event.pos[0], event.pos[1])
+			buttonDown[event.button] = True
+		elif event.type == MOUSEBUTTONUP:
+			buttonDown[event.button] = False
+
+
 	pygame.display.update()
+
+	if buttonDown[1]:
+		box1.mouseHeld(pygame.mouse.get_pos()[0])
 
 	for key in keyPressed:
 		keyMap[key] += 1
