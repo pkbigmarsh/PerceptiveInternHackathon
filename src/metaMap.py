@@ -44,11 +44,12 @@ def loadNext(direct):
 	file = open('../resources/level1.csv')
 	# file = open(levelName)
 	lines = file.readlines()
+	# lines.replace('\n', '')
 	tempValues = []
 	tempList = []
 	values = []
 	for line in lines:
-		line.replace('\n', '')
+		# line.replace('\n', '')
 		values.extend(line.split(','))
 	x = 0
 	y = 0
@@ -59,13 +60,13 @@ def loadNext(direct):
 			y+=1
 			# print tempList
 			if tempList:
-				tempValues.extend(tempList)
+				tempValues.append(tempList)
 			# print tempList
 			# print tempValues
 			del tempList[:]
 			tempList[:] = []
 			# print tempList
-		elif value != '\n' and value != '': 
+		if value != '\n' and value != '': 
 			tempList.append(value)
 			x+=1
 	print tempValues
@@ -75,9 +76,14 @@ def loadNext(direct):
 	# 	constants.MAP = 0
 	curMap = constants.MAP
 	if direct == "left":
-		constants.MAP -= 1
+		constants.CHARX -= 1
 	if direct == "right":
-		constants.MAP += 1
+		constants.CHARX += 1
+	if direct == "up":
+		constants.CHARY -= 1
+	if direct == "down":
+		constants.CHARY += 1
+	constants.MAP =
 	if constants.MAP < 0:
 		constants.MAP = curMap
 	if constants.MAP > len(values):
