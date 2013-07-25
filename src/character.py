@@ -25,7 +25,9 @@ class Character(Sprite):
 			loadNext('right')
 		if newY <= 0:
 			newY = HEIGHT - charHeight 
+			loadNext('up')
 		elif newY >= HEIGHT - charHeight:
+			loadNext('down')
 			newY = 0
 
 		self.set_position(newX, newY)
