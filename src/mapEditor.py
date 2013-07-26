@@ -24,12 +24,22 @@ pygame.display.set_caption('Map Editor')
 
 initTiles()
 
-whiteColor = pygame.Color(255,255,255)
-
 pygame.font.init()
 fontNormal = pygame.font.Font("../resources/font/Walkway rounded.ttf", 24)
-box1 = TextBox(0, 0, 400, 32, fontNormal)
-box1.value.string = "Bla bla"
+
+box1 = TextBox(800 // 2 - 400 // 2, 600 // 2 - 32 // 2 + 00, 400, 32, fontNormal)
+box1.value.string = "Thing 1"
+box2 = TextBox(800 // 2 - 400 // 2, 600 // 2 - 32 // 2 + 64, 400, 32, fontNormal)
+box2.value.string = "Thing 2"
+box3 = TextBox(800 // 2 - 400 // 2, 600 // 2 - 32 // 2 + 128, 400, 32, fontNormal)
+box3.value.string = "Thing 3"
+box3.disabled = True
+
+textBoxes = list()
+textBoxes.append(box1)
+textBoxes.append(box2)
+textBoxes.append(box3)
+
 
 initKeyStrings()
 
@@ -41,20 +51,33 @@ buttonDown[1] = False
 pygame.key.set_mods(0)
 
 while True:
-	windowSurfaceObj.fill(whiteColor)
+	windowSurfaceObj.fill(BLACK)
 	
-	drawTiles(windowSurfaceObj)
+	#drawTiles(windowSurfaceObj)
 
 	drawItems(windowSurfaceObj)
 
-	box1.draw(windowSurfaceObj)
+	for box in textBoxes:
+		box.draw(windowSurfaceObj)
+
+	if buttonDown[1]:
+		for box in textBoxes:
+			box.mouseHeld(pygame.mouse.get_pos()[0])
+
+	for key in keyPressed:
+		keyMap[key] += 1
+		if (keyMap[key]) > 15:
+			if (keyMap[key] % 2) == 0:
+				for box in textBoxes:
+					box.keyEvent(key)
 
 	for event in pygame.event.get():
 		if event.type == QUIT:
 			pygame.quit()
 			sys.exit()
 		elif event.type == KEYDOWN:
-			box1.keyEvent(event.key)
+			for box in textBoxes:
+				box.keyEvent(event.key)
 			keyMap[event.key] = 0
 			keyPressed.append(event.key)
 		elif event.type == KEYUP:
@@ -62,21 +85,12 @@ while True:
 				keyPressed.remove(event.key)
 		elif event.type == MOUSEBUTTONDOWN:
 			if event.button == 1:
-				box1.mouseDown(event.pos[0], event.pos[1])
+				for box in textBoxes:
+					box.mouseDown(event.pos[0], event.pos[1])
 			buttonDown[event.button] = True
 		elif event.type == MOUSEBUTTONUP:
 			buttonDown[event.button] = False
 
-
 	pygame.display.update()
-
-	if buttonDown[1]:
-		box1.mouseHeld(pygame.mouse.get_pos()[0])
-
-	for key in keyPressed:
-		keyMap[key] += 1
-		if (keyMap[key]) > 15:
-			if (keyMap[key] % 2) == 0:
-				box1.keyEvent(key)
 
 	fpsClock.tick(30)
