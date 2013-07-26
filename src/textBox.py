@@ -37,7 +37,6 @@ class TextBox(object):
 		else:
 			return 0
 
-
 	def mouseDown(self, x, y):
 		self.focused = False
 		if not self.disabled:
@@ -47,7 +46,6 @@ class TextBox(object):
 				y < self.y + self.h):
 				self.focused = True
 				self.start = self.getCursorPositionFromPosition(x)
-
 
 	def mouseHeld(self, x):
 		if self.focused:
@@ -71,7 +69,7 @@ class TextBox(object):
 			backgroundColor = TEXTBOX_BACKGROUND
 			textColor = TEXTBOX_TEXT
 
-		surface.fill(backgroundColor, Rect(self.x, self.y, self.w, self.h))
+		surface.fill(backgroundColor, (self.x, self.y, self.w, self.h))
 		pygame.draw.rect(surface, TEXTBOX_BORDER, Rect(self.x, self.y, self.w, self.h), 1)
 
 		text = self.font.render(self.getString(), True, textColor, backgroundColor)

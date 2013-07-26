@@ -14,6 +14,7 @@ from metaMap import *
 from constants import *
 from loadMap import *
 from textBox import *
+from button import *
 
 ## !! ----- Game Logic ----- !! ##
 pygame.init()
@@ -40,6 +41,7 @@ textBoxes.append(box1)
 textBoxes.append(box2)
 textBoxes.append(box3)
 
+button1 = Button(800 // 2 - 400 // 2, 600 // 2 - 32 // 2 - 64, 80, 32, "Button", fontNormal)
 
 initKeyStrings()
 
@@ -57,12 +59,17 @@ while True:
 
 	drawItems(windowSurfaceObj)
 
+	mouseX = pygame.mouse.get_pos()[0]
+	mouseY = pygame.mouse.get_pos()[1]
+
 	for box in textBoxes:
 		box.draw(windowSurfaceObj)
 
+	button1.draw(windowSurfaceObj)
+
 	if buttonDown[1]:
 		for box in textBoxes:
-			box.mouseHeld(pygame.mouse.get_pos()[0])
+			box.mouseHeld(mouseX)
 
 	for key in keyPressed:
 		keyMap[key] += 1
@@ -70,6 +77,8 @@ while True:
 			if (keyMap[key] % 2) == 0:
 				for box in textBoxes:
 					box.keyEvent(key)
+
+	button1.mouseMove(mouseX, mouseY)
 
 	for event in pygame.event.get():
 		if event.type == QUIT:
@@ -87,9 +96,12 @@ while True:
 			if event.button == 1:
 				for box in textBoxes:
 					box.mouseDown(event.pos[0], event.pos[1])
+				button1.mouseDown(event.pos[0], event.pos[1])
 			buttonDown[event.button] = True
 		elif event.type == MOUSEBUTTONUP:
 			buttonDown[event.button] = False
+			if event.button == 1:
+				button1.mouseUp()
 
 	pygame.display.update()
 
