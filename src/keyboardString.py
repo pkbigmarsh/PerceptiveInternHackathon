@@ -134,6 +134,10 @@ class keyboardString(object):
 			tk.destroy()
 			self.string = self.string[:self.start] + self.string[self.end:]
 
+		elif keyCode == K_a and (keyMods & KMOD_CTRL != 0):
+			self.start = 0
+			self.cursor = self.end = len(self.string)
+
 
 	def setCursorPosition(self, position):
 		if position < 0:

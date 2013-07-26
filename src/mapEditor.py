@@ -43,6 +43,9 @@ textBoxes.append(box3)
 
 button1 = Button(800 // 2 - 400 // 2, 600 // 2 - 32 // 2 - 64, 80, 32, "Button", fontNormal)
 
+buttons = list()
+buttons.append(button1)
+
 initKeyStrings()
 
 keyMap = dict()
