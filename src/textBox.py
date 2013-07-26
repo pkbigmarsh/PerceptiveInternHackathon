@@ -24,16 +24,18 @@ class TextBox(object):
 		self.disabled = False
 
 	def getCursorPositionFromPosition(self, x):
-		#	Font metrics
-		x -= self.x + 2
-		ans = 0
-		off = 0
-		for size in self.font.metrics(self.value.string):
-			if x < off + size[4] // 2:
-				break
-			off += size[4]
-			ans += 1
-		return ans
+		if len(self.value.string) > 0:
+			x -= self.x + 2
+			ans = 0
+			off = 0
+			for size in self.font.metrics(self.value.string):
+				if x < off + size[4] // 2:
+					break
+				off += size[4]
+				ans += 1
+			return ans
+		else:
+			return 0
 
 
 	def mouseDown(self, x, y):

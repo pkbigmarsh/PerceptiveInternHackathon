@@ -2,6 +2,7 @@
 #	Used to get a string of text entered by the user
 import pygame, sys
 from pygame.locals import *
+from Tkinter import Tk
 
 class keyboardString(object):
 	def __init__(self):
@@ -111,11 +112,27 @@ class keyboardString(object):
 				self.cursor = self.start = self.end = len(self.string)
 
 		elif keyCode == K_c and (keyMods & KMOD_CTRL != 0):
-			pass	#	TODO copy text
+			tk = Tk()
+			tk.withdraw()
+			tk.clipboard_clear()
+			tk.clipboard_append(self.string[self.start:self.end])
+			tk.destroy()
+
 		elif keyCode == K_v and (keyMods & KMOD_CTRL != 0):
-			pass	#	TODO paste text
+			tk = Tk()
+			tk.withdraw()
+			clipboard = tk.selection_get(selection = "CLIPBOARD")
+			tk.destroy()
+			self.string = self.string[:self.start] + clipboard + self.string[self.end:]
+			self.cursor = self.start = self.end + len(clipboard)
+
 		elif keyCode == K_x and (keyMods & KMOD_CTRL != 0):
-			pass	#	TODO cut text
+			tk = Tk()
+			tk.withdraw()
+			tk.clipboard_clear()
+			tk.clipboard_append(self.string[self.start:self.end])
+			tk.destroy()
+			self.string = self.string[:self.start] + self.string[self.end:]
 
 
 	def setCursorPosition(self, position):
