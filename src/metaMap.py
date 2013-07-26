@@ -8,7 +8,7 @@ import copy
 
 def metaMap(levelName):
 	file = open(levelName)
-	print file
+	# print file
 	lines = file.readlines()
 	tempValues = []
 	tempList = []
@@ -19,7 +19,7 @@ def metaMap(levelName):
 	x = 0
 	y = 0
 	for value in values:
-		print value
+		# print value
 		if value == '\n':
 			y+=1
 			# print tempList
@@ -33,13 +33,13 @@ def metaMap(levelName):
 			tempList.append(value)
 			x+=1
 
-	print values
+	# print values
 	# print values[0]
 	# print '../resources/' + values[0] + '.csv'
 	# print MAP
-	print len(values)
+	# print len(values)
 
-	print tempValues
+	# print tempValues
 def loadNext(direct):
 	file = open('../resources/level1.csv')
 	# file = open(levelName)
@@ -55,21 +55,23 @@ def loadNext(direct):
 	y = 0
 	for value in values:
 		# value.replace('\n','')
-		print value
+		# print value
 		if value == '\n':
 			y+=1
 			# print tempList
 			if tempList:
-				tempValues.append(tempList)
+				print tempList
+				tempValues.append(list(tempList))
+				print tempValues
 			# print tempList
 			# print tempValues
-			del tempList[:]
+			# del tempList[:]
 			tempList[:] = []
 			# print tempList
 		if value != '\n' and value != '': 
 			tempList.append(value)
 			x+=1
-	print tempValues
+	# print tempValues
 	# values = tempValues
 	# constants.MAP = constants.MAP + 1
 	# if constants.MAP > 1:
@@ -83,15 +85,22 @@ def loadNext(direct):
 		constants.CHARY -= 1
 	if direct == "down":
 		constants.CHARY += 1
-	constants.MAP =
-	if constants.MAP < 0:
+	print tempValues[constants.CHARY][constants.CHARX]
+	# constants.MAP = tempValues[CHARX][CHARY]
+	constants.MAP = "map2"
+	# print constants.MAP
+	if constants.CHARY < 0:
+		constants.CHARY = 0
 		constants.MAP = curMap
-	if constants.MAP > len(values):
+	# if constants.CHARY > len(tempValues):
+		# constants.MAP = curMap
+	if constants.CHARX < 0:
+		constants.CHARX = 0
 		constants.MAP = curMap
-	print constants.MAP
+	# print constants.MAP
 	# print values[0]
 	# print '../resources/' + values[0] + '.csv'
-	resource = '../resources/' + tempValues[constants.MAP] + '.csv'
+	resource = '../resources/' + constants.MAP + '.csv'
 	print resource
 	# print tileData
 	# clearMap()
