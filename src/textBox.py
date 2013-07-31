@@ -11,13 +11,13 @@ from constants import *
 #textBoxes = WeakValueDictionary()	#	<-- Look at that awesomeness right there
 
 class TextBox(object):
-	def __init__(self, x, y, w, h, font):
+	def __init__(self, x, y, w, h, font, text):
 		self.x = x
 		self.y = y
 		self.w = w
 		self.h = h
 		self.font = font
-		self.value = keyboardString()
+		self.value = keyboardString(text)
 		self.drawFontOffset = (h - font.get_height()) / 2
 		self.focused = False
 		self.start = 0

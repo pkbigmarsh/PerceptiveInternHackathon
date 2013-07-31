@@ -5,8 +5,8 @@ from pygame.locals import *
 from Tkinter import Tk
 
 class keyboardString(object):
-	def __init__(self):
-		self.string = ""
+	def __init__(self, string):
+		self.string = string
 		self.start = 0
 		self.end = 0
 		self.cursor = 0

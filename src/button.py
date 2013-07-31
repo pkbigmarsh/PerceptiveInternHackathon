@@ -66,8 +66,8 @@ class Button(object):
 
 		surface.fill(tlColor, (self.x, self.y, self.w, 1))
 		surface.fill(tlColor, (self.x, self.y, 1, self.h))
-		surface.fill(brColor, (self.x + self.w, self.y, 1, self.h))
-		surface.fill(brColor, (self.x, self.y + self.h, self.w, 1))
+		surface.fill(brColor, (self.x + self.w - 1, self.y, 1, self.h))
+		surface.fill(brColor, (self.x, self.y + self.h - 1, self.w, 1))
 
 		surface.fill(backgroundColor, (self.x + 1, self.y + 1, self.w - 2, self.h - 2))
 
